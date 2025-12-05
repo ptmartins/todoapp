@@ -60,7 +60,7 @@ main {
     box-shadow: 0 0 6px rgba(0, 0, 0, .18);
     display: flex;
     gap: .75rem;
-    margin-block-end: 4.5rem;
+    margin-block-end: 1.5rem;
     padding: .75rem;
 
     input {

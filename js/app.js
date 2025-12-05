@@ -187,6 +187,9 @@
             renderList();
         }
         setupEvents();
+
+        // Init flatpickr
+        flatpickr("#dateTimeBtn", {});
     };
 
     window.addEventListener('DOMContentLoaded', init);
