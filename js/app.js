@@ -138,6 +138,7 @@
             todos = [];
         } else {
             let savedTodos = JSON.parse(localStorage.getItem('todos'));
+            // Recreate obj instances
             todos = savedTodos.map(savedTodo => {
                 let todo = new ToDo(savedTodo.name);
                 todo.id = savedTodo.id;
