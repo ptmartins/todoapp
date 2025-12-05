@@ -4,7 +4,6 @@
     // ToDo: Add date/time when adding Todo and show it on each list item
     // ToDo: Show total of todos done on the app header
     // ToDo: Add 'sort' feature - by date added, by due date, etc...
-    // ToDo: Add modal to confirm action to delete
 
     class ToDo {
 
@@ -27,7 +26,8 @@
             this.item = document.createElement('LI');
             let title = document.createElement('DIV');
             let actions = document.createElement('DIV');
-            let checkbox = document.createElement('INPUT');
+            let checkbox = document.createElement('LABEL');
+            let checkboxInput = document.createElement('INPUT');
             let editEl = document.createElement('SPAN');
             let deleteEl = document.createElement('SPAN');
 
@@ -38,11 +38,12 @@
             deleteEl.textContent = 'delete';
             title.className = 'todo__title';
             actions.className = 'todo__actions';
-            checkbox.className = 'todo__check';
+            checkbox.className = 'todo__label';
+            checkboxInput.className = 'todo__input';
             editEl.className = 'todo__edit material-symbols-outlined';
             deleteEl.className = 'todo__delete material-symbols-outlined';
 
-            checkbox.setAttribute('type', 'checkbox');
+            checkboxInput.setAttribute('type', 'checkbox');
             editEl.setAttribute('title', 'Edit task');
             deleteEl.setAttribute('title', 'Delete task');
 
@@ -58,6 +59,8 @@
                     modal.close();
                 }
             }
+
+            checkbox.appendChild(checkboxInput);
 
             checkbox.addEventListener('click', this.toggleDone.bind(this));
             deleteEl.addEventListener('click', () => {
