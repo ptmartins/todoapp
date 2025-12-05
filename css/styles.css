@@ -83,13 +83,20 @@ main {
         cursor: pointer;
         font-size: 22px;
         height: var(--size);
+        opacity: .25;
         padding: 0;
+        pointer-events: none;
         transition: all .2s;
         width: var(--size);
 
         &:hover {
             background-color: blue;
             scale: 1.1;
+        }
+
+        &.active {
+            pointer-events: all;
+            opacity: 1
         }
     }
 }
@@ -246,4 +253,10 @@ footer {
 
 .modal__close {
     cursor: pointer;
+}
+
+.modal__footer {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: .75rem;
 }

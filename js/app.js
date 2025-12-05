@@ -95,6 +95,24 @@
         DOM.dateTimeBtn = document.getElementById('dateTimeBtn');
     }
 
+    let enableInputBtns = val => {
+        if(val === true) {
+            if(!DOM.dateTimeBtn.classList.contains('active')) {
+                DOM.dateTimeBtn.classList.add('active');
+            }
+            if(!DOM.addBtn.classList.contains('active')) {
+                DOM.addBtn.classList.add('active');
+            }
+        } else {
+            if(DOM.dateTimeBtn.classList.contains('active')) {
+                DOM.dateTimeBtn.classList.remove('active');
+            }
+            if(DOM.addBtn.classList.contains('active')) {
+                DOM.addBtn.classList.remove('active');
+            }
+        }
+    }
+
     /**
      * Setup event listeners
      */
@@ -103,6 +121,14 @@
         DOM.input.addEventListener('keydown', ev => {
             if(ev.key === 'Enter') {
                 addTodo();
+            }
+        });
+
+        DOM.input.addEventListener('input', ev => {
+            if(ev.target.value !== '') {
+                enableInputBtns(true);
+            } else {
+                enableInputBtns(false);
             }
         });
 
@@ -141,6 +167,7 @@
         }
 
         renderList();
+        enableInputBtns(false);
         clearInput();
     }
 
@@ -189,7 +216,10 @@
         setupEvents();
 
         // Init flatpickr
-        flatpickr("#dateTimeBtn", {});
+        flatpickr("#dateTimeBtn", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i"
+        });
     };
 
     window.addEventListener('DOMContentLoaded', init);

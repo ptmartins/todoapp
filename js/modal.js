@@ -32,6 +32,8 @@
         cancelBtn.textContent = 'Cancel';
         confirmBtn.textContent = config.actionBtnTxt;
 
+        closeBtn.setAttribute('title', 'Close');
+
         closeBtn.addEventListener('click', close);
         cancelBtn.addEventListener('click', close);
         confirmBtn.addEventListener('click', config.cbFn);
