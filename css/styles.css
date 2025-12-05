@@ -29,6 +29,18 @@ ul {
     list-style: none;
 }
 
+button,
+.btn {
+    background-color: #1a1e1b;
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: .75rem 1.5rem;
+    transition: all .2s;
+}
+
 /* Header */
 
 
@@ -39,7 +51,7 @@ main {
 }
 
 .input-group {
-    --size: 28px;
+    --size: 36px;
 
     align-items: center;
     background-color: #fff;
@@ -62,13 +74,16 @@ main {
         }
     }
 
-    .btn--add {
+    .btn--add, 
+    .btn--dateTime {
         background-color: #000;
         border: 0;
-        border-radius: 50%;
+        border-radius: 6px;
         color: #fff;
         cursor: pointer;
+        font-size: 22px;
         height: var(--size);
+        padding: 0;
         transition: all .2s;
         width: var(--size);
 
@@ -82,6 +97,18 @@ main {
 .input-group:has(input:focus) {
     border-color: blue;
     outline: 1px solid blue;
+}
+
+.btn--deleteAll {
+    &:hover {
+        background-color: orangered;
+    }
+}
+
+.todos__actions {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-block-end: 1.5rem;
 }
 
 .todo {

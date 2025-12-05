@@ -91,18 +91,27 @@
         DOM.input = document.getElementById('todoInput');
         DOM.addBtn = document.getElementById('addBtn');
         DOM.todosList = document.getElementById('todosList');
+        DOM.deleteAllTodos = document.getElementById('deleteAllTodos');
+        DOM.dateTimeBtn = document.getElementById('dateTimeBtn');
     }
 
     /**
      * Setup event listeners
      */
     let setupEvents = () => {
+        // Add todo on ENTER
         DOM.input.addEventListener('keydown', ev => {
             if(ev.key === 'Enter') {
                 addTodo();
             }
         });
+
+        // Add todo on Add button click
         DOM.addBtn.addEventListener('click', addTodo);
+
+        DOM.dateTimeBtn.addEventListener('click', () => console.log('from datime'))
+
+        // Delete todo
         window.addEventListener('deleteTodo', ev => {
             deleteToDo(ev.detail);
         });
