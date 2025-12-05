@@ -82,7 +82,7 @@
     /**
      * Array of ToDo's
      */
-    let todos = null;
+    let todos = [];
 
     /**
      * Cache DOM elements
@@ -115,6 +115,15 @@
     }
 
     /**
+     * Delete all todos
+     */
+    let deleteAllTodos = () => {
+        todos = [];
+        localStorage.setItem('todos', '');
+        DOM.todosList.innerHTML = '';
+    }
+
+    /**
      * Setup event listeners
      */
     let setupEvents = () => {
@@ -122,6 +131,10 @@
         DOM.input.addEventListener('keydown', ev => {
             if(ev.key === 'Enter') {
                 addTodo();
+            }
+
+            if(ev.key === 'Escape') {
+                DOM.input.blur();
             }
         });
 
@@ -136,12 +149,25 @@
         // Add todo on Add button click
         DOM.addBtn.addEventListener('click', addTodo);
 
-        DOM.dateTimeBtn.addEventListener('click', () => console.log('from datime'))
+        // Add date/time
+        DOM.dateTimeBtn.addEventListener('click', () => console.log('from datime'));
+
+        // Clear todos
+        DOM.deleteAllTodos.addEventListener('click', () => {
+            let modalObj = {
+                title: 'Delete all',
+                content: 'Are you sure you wan tot delete all tasks? The action cannot be reverted.',
+                actionBtnTxt: 'Delete all',
+                cbFn: deleteAllTodos
+            };
+            modal.render(modalObj);
+        });
 
         // Delete todo
         window.addEventListener('deleteTodo', ev => {
             deleteToDo(ev.detail);
         });
+
     }
 
     /**
@@ -212,15 +238,18 @@
             localStorage.setItem('todos', JSON.stringify([]));
             todos = [];
         } else {
-            let savedTodos = JSON.parse(localStorage.getItem('todos'));
-            // Recreate obj instances
-            todos = savedTodos.map(savedTodo => {
-                let todo = new ToDo(savedTodo.name);
-                todo.id = savedTodo.id;
-                todo.done = savedTodo.done;
-                return todo;
-            });
-            renderList();
+            if(localStorage.todos !== '') {
+                let savedTodos = JSON.parse(localStorage.getItem('todos'));
+                
+                // Recreate obj instances
+                todos = savedTodos.map(savedTodo => {
+                    let todo = new ToDo(savedTodo.name);
+                    todo.id = savedTodo.id;
+                    todo.done = savedTodo.done;
+                    return todo;
+                });
+                renderList();
+            }
         }
         setupEvents();
         setCopyrightYear();

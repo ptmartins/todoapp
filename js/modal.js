@@ -42,7 +42,10 @@
 
         closeBtn.addEventListener('click', close);
         cancelBtn.addEventListener('click', close);
-        confirmBtn.addEventListener('click', config.cbFn);
+        confirmBtn.addEventListener('click', () => {
+            config.cbFn();
+            close();
+        });
 
         modalHeader.append(modalTitle, closeBtn);
         modalBody.textContent = config.content;
