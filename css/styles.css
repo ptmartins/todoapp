@@ -20,6 +20,8 @@ body {
 header,
 main,
 footer {
+    margin-inline: auto;
+    max-width: 980px;
     padding: 1.5rem;
 }
 
@@ -41,16 +43,18 @@ main {
 
     align-items: center;
     background-color: #fff;
-    border: 1px solid #9b9b9b;
+    border: 1px solid #fff;
     border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .18);
     display: flex;
     gap: .75rem;
-    margin-block-end: 1.5rem;
+    margin-block-end: 4.5rem;
     padding: .75rem;
 
     input {
         border: 0;
         flex-grow: 1;
+        font-size: 1.1rem;
         height: var(--size);
 
         &:focus {
@@ -63,8 +67,15 @@ main {
         border: 0;
         border-radius: 50%;
         color: #fff;
+        cursor: pointer;
         height: var(--size);
+        transition: all .2s;
         width: var(--size);
+
+        &:hover {
+            background-color: blue;
+            scale: 1.1;
+        }
     }
 }
 
@@ -74,32 +85,50 @@ main {
 }
 
 .todo {
+    align-items: center;
     background-color: #fff;
-    border: 1px solid #9b9b9b;
+    border: 1px solid #fff;
     border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, .18);
     display: flex;
+    font-size: 1.1rem;
+    gap: .75rem;
     margin-block-end: .75rem;
     padding: .75rem;
     width: 100%;
 }
 
+.todo__title {
+    flex-grow: 1;
+}
+
 .todo__actions {
     display: flex;
-    gap: .375rem;
+    gap: .75rem;
     margin-inline-start: auto;
 }
 
+.todo__edit, 
 .todo__delete {
     cursor: pointer;
+    font-size: 26px;
     transition: all .2s;
+    opacity: .4;
 
     &:hover {
-        color: red;
+        opacity: 1;
     }
+}
+
+.todo__delete:hover {
+    color: red;
 }
 
 /* Footer */
 footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
     text-align: center;
 }
 
@@ -119,6 +148,7 @@ footer {
     box-shadow: 0 0 8px rgba(0, 0, 0, .5);
     inset-block-start: 50%;
     inset-inline-start: 50%;
+    min-width: 640px;
     position: absolute;
     transform: translate(-50%, -50%);
 }

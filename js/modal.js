@@ -8,7 +8,7 @@
         } 
     }
 
-    let render = (title, content, cbFn) => {
+    let render = (config) => {
         let overlay = document.createElement('DIV');
         let modal = document.createElement('DIV');
         let modalHeader = document.createElement('DIV');
@@ -16,8 +16,8 @@
         let modalBody = document.createElement('DIV');
         let modalFooter = document.createElement('DIV');
         let closeBtn = document.createElement('SPAN');
-        let cancelBtn = document.createElement('DIV');
-        let confirmBtn = document.createElement('DIV');
+        let cancelBtn = document.createElement('BUTTON');
+        let confirmBtn = document.createElement('BUTTON');
 
         overlay.className = 'overlay overlay--modal';
         modal.className = 'modal';
@@ -27,15 +27,17 @@
         modalTitle.className = 'modal__title';
         closeBtn.className = 'modal__close material-symbols-outlined';
 
-        modalTitle.textContent = title;
+        modalTitle.textContent = config.title;
         closeBtn.textContent = 'close';
+        cancelBtn.textContent = 'Cancel';
+        confirmBtn.textContent = config.actionBtnTxt;
 
         closeBtn.addEventListener('click', close);
         cancelBtn.addEventListener('click', close);
-        confirmBtn.addEventListener('click', cbFn);
+        confirmBtn.addEventListener('click', config.cbFn);
 
         modalHeader.append(modalTitle, closeBtn);
-        modalBody.textContent = content;
+        modalBody.textContent = config.content;
         modalFooter.append(cancelBtn, confirmBtn);
         modal.append(modalHeader, modalBody, modalFooter);
         overlay.appendChild(modal);

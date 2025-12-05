@@ -25,29 +25,47 @@
 
         render() {
             this.item = document.createElement('LI');
+            let title = document.createElement('DIV');
             let actions = document.createElement('DIV');
             let checkbox = document.createElement('INPUT');
+            let editEl = document.createElement('SPAN');
             let deleteEl = document.createElement('SPAN');
 
             this.item.className = `todo`;
-            this.item.textContent = this.name;
+            title.textContent = this.name;
             this.item.setAttribute('data-id', this.id);
+            editEl.textContent = 'edit';
             deleteEl.textContent = 'delete';
+            title.className = 'todo__title';
             actions.className = 'todo__actions';
             checkbox.className = 'todo__check';
+            editEl.className = 'todo__edit material-symbols-outlined';
             deleteEl.className = 'todo__delete material-symbols-outlined';
+
             checkbox.setAttribute('type', 'checkbox');
+            editEl.setAttribute('title', 'Edit task');
+            deleteEl.setAttribute('title', 'Delete task');
+
+            let modalObj = {
+                title: 'Delete todo',
+                content: 'Are you sure you want to delete the current ToDo?',
+                actionBtnTxt: 'Delete',
+                cbFn: () => {
+                    let ev = new CustomEvent('deleteTodo', {
+                        detail: this.id
+                    });
+                    window.dispatchEvent(ev);
+                    modal.close();
+                }
+            }
 
             checkbox.addEventListener('click', this.toggleDone.bind(this));
             deleteEl.addEventListener('click', () => {
-                let ev = new CustomEvent('deleteTodo', {
-                    detail: this.id
-                });
-                window.dispatchEvent(ev);
+                modal.render(modalObj);
             });
 
-            actions.append(checkbox, deleteEl);
-            this.item.append(actions);
+            actions.append(editEl, deleteEl);
+            this.item.append(checkbox, title, actions);
 
             return(this.item);
         }
@@ -83,7 +101,7 @@
         });
         DOM.addBtn.addEventListener('click', addTodo);
         window.addEventListener('deleteTodo', ev => {
-            modal.render('Delete', "are you sure you want to delete?", deleteToDo(ev.detail))
+            deleteToDo(ev.detail);
         });
     }
 
