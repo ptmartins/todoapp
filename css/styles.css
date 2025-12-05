@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -9,5 +11,134 @@ html {
 }
 
 body {
+    background-color: #e3edf8;
+    font-family: "Inter", sans-serif;
     line-height: 1.5;
+    padding: 3rem;
+}
+
+header,
+main,
+footer {
+    padding: 1.5rem;
+}
+
+ul {
+    list-style: none;
+}
+
+/* Header */
+
+
+
+/* Main */
+main {
+    padding-block: 4.5rem;
+}
+
+.input-group {
+    --size: 28px;
+
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #9b9b9b;
+    border-radius: 8px;
+    display: flex;
+    gap: .75rem;
+    margin-block-end: 1.5rem;
+    padding: .75rem;
+
+    input {
+        border: 0;
+        flex-grow: 1;
+        height: var(--size);
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    .btn--add {
+        background-color: #000;
+        border: 0;
+        border-radius: 50%;
+        color: #fff;
+        height: var(--size);
+        width: var(--size);
+    }
+}
+
+.input-group:has(input:focus) {
+    border-color: blue;
+    outline: 1px solid blue;
+}
+
+.todo {
+    background-color: #fff;
+    border: 1px solid #9b9b9b;
+    border-radius: 8px;
+    display: flex;
+    margin-block-end: .75rem;
+    padding: .75rem;
+    width: 100%;
+}
+
+.todo__actions {
+    display: flex;
+    gap: .375rem;
+    margin-inline-start: auto;
+}
+
+.todo__delete {
+    cursor: pointer;
+    transition: all .2s;
+
+    &:hover {
+        color: red;
+    }
+}
+
+/* Footer */
+footer {
+    text-align: center;
+}
+
+/* Modal */
+.overlay {
+    background-color: rgba(0, 0, 0, .8);
+    height: 100%;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    position: fixed;
+    width: 100%;
+}
+
+.modal {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+    inset-block-start: 50%;
+    inset-inline-start: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+.modal__header, 
+.modal__body,
+.modal__footer {
+    padding: 1.5rem;
+}
+
+.modal__header {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal__title {
+    font-size: 1.5rem;
+}
+
+.modal__close {
+    cursor: pointer;
 }

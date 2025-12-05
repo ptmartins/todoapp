@@ -1,5 +1,11 @@
 (function() {
 
+    // ToDo: Add edit to each todo
+    // ToDo: Add date/time when adding Todo and show it on each list item
+    // ToDo: Show total of todos done on the app header
+    // ToDo: Add 'sort' feature - by date added, by due date, etc...
+    // ToDo: Add modal to confirm action to delete
+
     class ToDo {
 
         id;
@@ -19,15 +25,17 @@
 
         render() {
             this.item = document.createElement('LI');
+            let actions = document.createElement('DIV');
             let checkbox = document.createElement('INPUT');
             let deleteEl = document.createElement('SPAN');
 
             this.item.className = `todo`;
             this.item.textContent = this.name;
             this.item.setAttribute('data-id', this.id);
-            deleteEl.textContent = 'delete'
-            checkbox.className = 'check';
-            deleteEl.className = 'delete';
+            deleteEl.textContent = 'delete';
+            actions.className = 'todo__actions';
+            checkbox.className = 'todo__check';
+            deleteEl.className = 'todo__delete material-symbols-outlined';
             checkbox.setAttribute('type', 'checkbox');
 
             checkbox.addEventListener('click', this.toggleDone.bind(this));
@@ -38,7 +46,8 @@
                 window.dispatchEvent(ev);
             });
 
-            this.item.append(checkbox, deleteEl);
+            actions.append(checkbox, deleteEl);
+            this.item.append(actions);
 
             return(this.item);
         }
@@ -74,7 +83,7 @@
         });
         DOM.addBtn.addEventListener('click', addTodo);
         window.addEventListener('deleteTodo', ev => {
-            deleteToDo(ev.detail);
+            modal.render('Delete', "are you sure you want to delete?", deleteToDo(ev.detail))
         });
     }
 

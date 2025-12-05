@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ToDo App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -13,7 +14,7 @@
     <main class="main">
         <div class="input-group">
             <input type="text" id="todoInput" class="todoInput" placeholder="Add a new task..." />
-            <button id="addBtn">Add</button>
+            <button id="addBtn" class="btn btn--add material-symbols-outlined">add</button>
         </div>
         <div id="todos" class="todos">
             <ul id="todosList" class="todosList">
@@ -28,6 +29,7 @@
         <p>&copy; 2024 ToDo App. All rights reserved.</p>
     </footer>
 
+    <script src="js/modal.js"></script>
     <script src="js/app.js"></script>
 </body>
 </html>
