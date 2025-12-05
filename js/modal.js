@@ -1,5 +1,8 @@
 (function(modal) {
 
+    /**
+     * Close modal
+     */
     let close = () => {
         let modal = document.querySelector('.overlay--modal');
 
@@ -8,6 +11,9 @@
         } 
     }
 
+    /**
+     * Render modal
+     */
     let render = (config) => {
         let overlay = document.createElement('DIV');
         let modal = document.createElement('DIV');

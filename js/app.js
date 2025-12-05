@@ -93,6 +93,7 @@
         DOM.todosList = document.getElementById('todosList');
         DOM.deleteAllTodos = document.getElementById('deleteAllTodos');
         DOM.dateTimeBtn = document.getElementById('dateTimeBtn');
+        DOM.copyrightYear = document.getElementById('copyrightYear');
     }
 
     let enableInputBtns = val => {
@@ -144,7 +145,7 @@
     }
 
     /**
-     * 
+     * Renders list of todos
      */
     let renderList = () => {
         DOM.todosList.innerHTML = '';
@@ -195,6 +196,14 @@
     }
 
     /**
+     * Sets footer copyright year
+     */
+    let setCopyrightYear = () => {
+        let year = new Date().getFullYear();
+        DOM.copyrightYear.textContent = year
+    }
+
+    /**
      * Quick-off logic
      */
     let init = () => {
@@ -214,6 +223,7 @@
             renderList();
         }
         setupEvents();
+        setCopyrightYear();
 
         // Init flatpickr
         flatpickr("#dateTimeBtn", {
