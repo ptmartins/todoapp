@@ -20,6 +20,12 @@
 
         toggleDone () {
             this.item.classList.toggle('todo--done');
+            this.done = !this.done;
+
+            let ev = new CustomEvent('changeDone', {
+                detail: this
+            })
+            window.dispatchEvent(ev);
         }
 
         render() {
@@ -31,7 +37,7 @@
             let editEl = document.createElement('SPAN');
             let deleteEl = document.createElement('SPAN');
 
-            this.item.className = `todo`;
+            this.item.className = `${this.done ? 'todo todo--done' : 'todo'}`;
             title.textContent = this.name;
             this.item.setAttribute('data-id', this.id);
             editEl.textContent = 'edit';
@@ -44,6 +50,15 @@
             deleteEl.className = 'todo__delete material-symbols-outlined';
 
             checkboxInput.setAttribute('type', 'checkbox');
+
+            if(this.done) {
+                checkboxInput.setAttribute('checked', true);
+            } else {
+                if(checkboxInput.hasAttribute('checked', true)) {
+                    checkboxInput.setAttribute('checked', false);
+                }
+            }
+
             editEl.setAttribute('title', 'Edit task');
             deleteEl.setAttribute('title', 'Delete task');
 
@@ -62,7 +77,10 @@
 
             checkbox.appendChild(checkboxInput);
 
-            checkbox.addEventListener('click', this.toggleDone.bind(this));
+            checkbox.addEventListener('click', () => {
+                this.toggleDone();
+            });
+            
             deleteEl.addEventListener('click', () => {
                 modal.render(modalObj);
             });
@@ -120,7 +138,11 @@
     let deleteAllTodos = () => {
         todos = [];
         localStorage.setItem('todos', '');
-        DOM.todosList.innerHTML = '';
+        renderList();
+    }
+
+    let updateLocalStorage = () => {
+        localStorage.setItem('todos', JSON.stringify(todos));
     }
 
     /**
@@ -167,7 +189,10 @@
         window.addEventListener('deleteTodo', ev => {
             deleteToDo(ev.detail);
         });
-
+        
+        window.addEventListener('changeDone', ev => {
+            updateLocalStorage();
+        })
     }
 
     /**
@@ -179,6 +204,14 @@
             let item = todo.render();
             DOM.todosList.appendChild(item);
         });
+
+        if(todos.length > 0) {
+            DOM.deleteAllTodos.classList.add('active');
+        } else {
+            if(DOM.deleteAllTodos.classList.contains('active')) {
+                DOM.deleteAllTodos.classList.remove('active');
+            }
+        }
     }
 
     /**

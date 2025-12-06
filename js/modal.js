@@ -32,6 +32,8 @@
         modalFooter.className = 'modal__footer';
         modalTitle.className = 'modal__title';
         closeBtn.className = 'modal__close material-symbols-outlined';
+        cancelBtn.classList = 'btn btn--cancelModal';
+        confirmBtn.classList = 'btn btn--confirmModal';
 
         modalTitle.textContent = config.title;
         closeBtn.textContent = 'close';
