@@ -112,6 +112,7 @@
         DOM.deleteAllTodos = document.getElementById('deleteAllTodos');
         DOM.dateTimeBtn = document.getElementById('dateTimeBtn');
         DOM.copyrightYear = document.getElementById('copyrightYear');
+        DOM.totalDone = document.getElementById('totalDone');
     }
 
     let enableInputBtns = val => {
@@ -141,20 +142,39 @@
         renderList();
     }
 
+    /**
+     * Updates loclaStorage
+     */
     let updateLocalStorage = () => {
         localStorage.setItem('todos', JSON.stringify(todos));
+    }
+
+    /**
+     * Updates total of ToDos done
+     */
+    let updateTotalDone = () => {
+        let total = 0;
+
+        todos.forEach(todo => {
+            if(todo.done) {
+                total++;
+            }
+        });
+
+        DOM.totalDone.textContent = total;
     }
 
     /**
      * Setup event listeners
      */
     let setupEvents = () => {
-        // Add todo on ENTER
         DOM.input.addEventListener('keydown', ev => {
+            // Add todo on ENTER
             if(ev.key === 'Enter') {
                 addTodo();
             }
 
+            // Blur input when hiting Escape 
             if(ev.key === 'Escape') {
                 DOM.input.blur();
             }
@@ -171,7 +191,7 @@
         // Add todo on Add button click
         DOM.addBtn.addEventListener('click', addTodo);
 
-        // Add date/time
+        // ToDo: Add date/time
         DOM.dateTimeBtn.addEventListener('click', () => console.log('from datime'));
 
         // Clear todos
@@ -191,7 +211,8 @@
         });
         
         window.addEventListener('changeDone', ev => {
-            updateLocalStorage();
+            updateLocalStorage(); 
+            updateTotalDone();
         })
     }
 
@@ -212,6 +233,8 @@
                 DOM.deleteAllTodos.classList.remove('active');
             }
         }
+
+        updateTotalDone();
     }
 
     /**
