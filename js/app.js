@@ -102,6 +102,8 @@
      */
     let todos = [];
 
+    let datePickr = null;
+
     /**
      * Cache DOM elements
      */
@@ -113,6 +115,7 @@
         DOM.dateTimeBtn = document.getElementById('dateTimeBtn');
         DOM.copyrightYear = document.getElementById('copyrightYear');
         DOM.totalDone = document.getElementById('totalDone');
+        DOM.dateTimeInput = document.getElementById('dateTimeInput');
     }
 
     let enableInputBtns = val => {
@@ -192,7 +195,10 @@
         DOM.addBtn.addEventListener('click', addTodo);
 
         // ToDo: Add date/time
-        DOM.dateTimeBtn.addEventListener('click', () => console.log('from datime'));
+        DOM.dateTimeBtn.addEventListener('click', () => { 
+            console.log('from datime');
+            datePickr.open();
+        });
 
         // Clear todos
         DOM.deleteAllTodos.addEventListener('click', () => {
@@ -311,9 +317,10 @@
         setCopyrightYear();
 
         // Init flatpickr
-        flatpickr("#dateTimeBtn", {
+        datePickr = flatpickr(DOM.dateTimeInput, {
             enableTime: true,
-            dateFormat: "Y-m-d H:i"
+            dateFormat: "Y-m-d H:i",
+            positionElement: DOM.dateTimeBtn
         });
     };
 

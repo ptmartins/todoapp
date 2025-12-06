@@ -121,6 +121,7 @@ main {
 .input-group:has(input:focus) {
     border-color: #0c4647;
     outline: 2px solid #0c4647;
+    position: relative;
 }
 
 .btn--deleteAll {
@@ -253,6 +254,7 @@ footer {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 8px rgba(0, 0, 0, .5);
+    color: #111;
     inset-block-start: 50%;
     inset-inline-start: 50%;
     min-width: 640px;
